@@ -11,7 +11,7 @@ static class Grid {
         }
     }
     
-    public static void MainLoop() {
+    public static void ProcessInput() {
         Grid.writeComment();
         foreach (var perms in Permutation.PermutateBits(Grid.NeighborCount, 20)) {
             Grid.fill(perms);
