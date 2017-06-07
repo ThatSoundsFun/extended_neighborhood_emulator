@@ -65,6 +65,7 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="Output.cs" />
     <Compile Include="Permutation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,7 +5,7 @@ using System.Linq;
 static class Permutation {
     //Returns a list of permutations of a bit.
     public static IEnumerable<IEnumerable<bool>> PermutateBits(int onBits, int total) {
-        int min = Int32.MaxValue >> (32 - onBits);
+        int min = Int32.MaxValue >> (31 - onBits);
         int max = min << (total - onBits);
 
         for (int i = min; i <= max; i++) {

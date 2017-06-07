@@ -11,11 +11,12 @@ static class Grid {
         }
     }
     
+    //Processes user input into cell transitions.
     public static void ProcessInput() {
         Grid.writeComment();
         foreach (var perms in Permutation.PermutateBits(Grid.NeighborCount, 20)) {
             Grid.fill(perms);
-            Grid.writeToFile();
+            Grid.addToOutput();
         }
     }
 
@@ -28,8 +29,8 @@ static class Grid {
         } else {
             center = "ON_COUNT";
         }
-        Program.OutputFile.WriteLine("#overrides COUNT_STATES -> OFF");
-        Program.OutputFile.WriteLine("#{0} -> ON when there's {1} neighbor(s)", center, NeighborCount);
+        //The two lines were merged because the first line is not unique and will get removed.
+        Output.AddLine(String.Format("#overrides COUNT_STATES -> OFF\n #{0} -> ON when there's {1} neighbor(s)", center, NeighborCount));
     }
 
     //Transfers the bit permutation to the grid.
@@ -60,9 +61,9 @@ static class Grid {
         }
     }
 
-    //Writes the cell transitions to the output-file.
-    private static void writeToFile() {
-        Program.OutputFile.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},1", grid[2, 2].ToCountGroup(0),                    //center              
+    //Gets cell transition from grid, then adds it to output
+    private static void addToOutput() {
+        Output.AddLine(String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},1", grid[2, 2].ToCountGroup(0),                    //center              
                                                                               grid[2, 1].ToCountState(countNeighbors(2, 1)), //north
                                                                               grid[3, 1].ToCountGroup(1),                    //northeast
                                                                               grid[3, 2].ToCountState(countNeighbors(3, 2)), //east
@@ -71,7 +72,7 @@ static class Grid {
                                                                               grid[1, 3].ToCountGroup(3),                    //southwest
                                                                               grid[1, 2].ToCountState(countNeighbors(1, 2)), //west
                                                                               grid[1, 1].ToCountGroup(4)                     //northwest
-       );
+       ));
     }
 
     //Counts the number of on-cells around a center.

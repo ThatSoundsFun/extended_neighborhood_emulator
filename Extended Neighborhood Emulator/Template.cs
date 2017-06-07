@@ -1,12 +1,6 @@
 ﻿static class Template {
 
-    public static string TopPart {
-        get {
-            return string.Format(topPart, Program.OutputFileName.Substring(0, Program.OutputFileName.IndexOf('.')));
-        }
-    }
-
-    private const string topPart =
+    public const string TopPart =
 @"@RULE {0}
 
 States:
@@ -30,7 +24,7 @@ var a2 = a1
 var a3 = a1
 var a4 = a1
 var a5 = a1
-var a6 = a1     
+var a6 = a1
 var a7 = a1
 var a8 = a1
 
@@ -84,7 +78,7 @@ var 1c4 = 1c0
 0,1,0,0,1,0,0,0,0,3
 0,1,0,1,0,0,0,0,0,3
 0,1,1,0,0,0,0,0,0,3
-#OFF -> OFF_COUNT_3 when there's 1 neighbors
+#OFF -> OFF_COUNT_3 when there's 3 neighbors
 0,0,0,0,0,0,1,1,1,4
 0,0,0,0,0,1,0,1,1,4
 0,0,0,0,0,1,1,0,1,4
@@ -349,6 +343,7 @@ var 1c4 = 1c0
 1,1,0,0,1,0,0,0,0,12
 1,1,0,1,0,0,0,0,0,12
 1,1,1,0,0,0,0,0,0,12
+#ON -> ON_COUNT_3 when there's 3 neighbors
 1,0,0,0,0,0,1,1,1,13
 1,0,0,0,0,1,0,1,1,13
 1,0,0,0,0,1,1,0,1,13

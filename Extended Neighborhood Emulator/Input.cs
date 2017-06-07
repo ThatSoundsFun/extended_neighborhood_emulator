@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using System.IO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 static class Input {
-    const string InputFileName = "Input.json";
-    const string Default =
+    private const string fileName = "Input.json";
+    private const string @default =
 @"{
   ""Born"": [],
   ""Survive"": []
@@ -22,31 +22,23 @@ static class Input {
     }
 
     //Returns the data input.
-    //Exits out application if the input-file does not exist or is unreadable.
+    //Exits out the application early if the input-file does not exist or is unreadable.
     private static object readInputFile() {
         try {
-            return JsonConvert.DeserializeObject(File.ReadAllText(InputFileName));
+            return JsonConvert.DeserializeObject(File.ReadAllText(fileName));
         } catch (FileNotFoundException) {
             Console.WriteLine("Error: Input-file not found.");
             Console.WriteLine("Creating new input-file...");
-
-            File.WriteAllText(InputFileName, Default);
-
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
-            Environment.Exit(0);
+            File.WriteAllText(fileName, @default);
+            Program.Exit();
         } catch (JsonException) {
             Console.WriteLine("Error: Input-file is unreadable.");
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
-            Environment.Exit(0);
+            Program.Exit();
         } catch (Exception e) {
             Console.WriteLine("Error: {0}", e);
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
-            Environment.Exit(0);
+            Program.Exit();
         }
 
-        throw new ArgumentException("Unable to exit automatically.");
+        throw new ArgumentException("This should never happen.");
     }
 }
