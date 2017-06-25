@@ -35,7 +35,8 @@ static class Input {
     //Exits out the application early if the input-file does not exist or is unreadable.
     private static object readInput() {
         try {
-            return JsonConvert.DeserializeObject(File.ReadAllText(fileName));
+            //forward slashes get replaced by backslashes as json.net can't deserialize with them.
+            return JsonConvert.DeserializeObject(File.ReadAllText(fileName).Replace('\\','/'));
         } catch (FileNotFoundException) {
             Console.WriteLine("Error: File not found.");
             Console.WriteLine("Creating new input-file...");
@@ -46,7 +47,7 @@ static class Input {
             Console.WriteLine("Error: File cannot be accessed.");
         } catch (DirectoryNotFoundException) {
             Console.WriteLine("Error: Directory not found");
-        } catch (JsonException) {
+        } catch (JsonReaderException) {
             Console.WriteLine("Error: Input-file is unreadable.");
         } catch (Exception e) {
             Console.WriteLine("Error: {0}", e);
