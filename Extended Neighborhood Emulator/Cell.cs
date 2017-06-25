@@ -1,5 +1,6 @@
-﻿enum Cell { OFF = 0, ON = 1 }
-
+﻿
+//Represents the normal on and off cells.
+enum Cell { OFF = 0, ON = 1 }
 static class CellExtension {
     private const int OffCountOffset = 1;
     private const int OnCountOffset = 10;

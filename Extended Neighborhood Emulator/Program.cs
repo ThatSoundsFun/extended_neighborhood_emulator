@@ -15,17 +15,13 @@ static class Program {
     }
 
     private static void Main(string[] args) {
-        Console.WriteLine("Generating Rule Table...");
-        foreach (var i in Input.Born) {
-            Grid.NeighborCount = i;
-            Grid.Center = Cell.OFF;
-            Grid.ProcessInput();
+        Console.WriteLine("Building Rule Table...");
+        foreach (var birthCount in Input.Born) {
+            Output.AddLine(Pregenerated.Born[birthCount]);
         }
-        foreach (var i in Input.Survive) {
-            Grid.NeighborCount = i;
-            Grid.Center = Cell.ON;
-            Grid.ProcessInput();
+        foreach (var survivalCount in Input.Survive) {
+            Output.AddLine(Pregenerated.Survive[survivalCount]);
         }
-        Output.WriteToFile();
+        Output.WriteRuleTable();
     }
 }
